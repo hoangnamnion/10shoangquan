@@ -12,6 +12,8 @@
     --bg:#0b0f1a;
     --pink:#f9a8d4;
     --pink-glow:rgba(249,168,212,.6);
+    --blue:#93c5fd;
+    --blue-glow:rgba(147,197,253,.5);
     --text:#fdf2f8;
     --muted:#fbcfe8;
     --card-bg:rgba(255,255,255,.06);
@@ -43,7 +45,7 @@ body{
 /* CARD */
 .card{
     width:100%;
-    max-width:min(92vw, 380px);
+    max-width:min(92vw, 420px);
     padding:clamp(28px, 6vw, 36px) clamp(20px, 4vw, 26px);
     text-align:center;
     background:var(--card-bg);
@@ -67,7 +69,7 @@ body{
     right:0;
     bottom:0;
     border-radius:26px;
-    background:linear-gradient(135deg, rgba(249,168,212,.1), transparent 30%);
+    background:linear-gradient(135deg, rgba(249,168,212,.1), rgba(147,197,253,.1) 100%);
     pointer-events:none;
 }
 
@@ -97,27 +99,34 @@ p{
     animation:float 3s ease-in-out infinite;
 }
 
-/* BUTTON */
-button{
+/* BUTTON GROUP */
+.button-group{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:clamp(14px, 4vw, 18px);
     margin-top:clamp(24px, 6vw, 32px);
+}
+
+/* BUTTON STYLES */
+.btn{
     width:100%;
     padding:clamp(14px, 4vw, 16px);
     font-size:clamp(0.95rem, 3.5vw, 1rem);
     font-weight:700;
-    color:#831843;
-    background:linear-gradient(135deg,#fce7f3,#f9a8d4);
     border:none;
     border-radius:999px;
     cursor:pointer;
-    box-shadow:0 4px 20px var(--pink-glow);
-    animation:pulse 2.2s infinite;
     position:relative;
     overflow:hidden;
     transition:all 0.3s ease;
     touch-action:manipulation;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
 }
 
-button::after{
+.btn::after{
     content:'';
     position:absolute;
     top:0;
@@ -128,23 +137,90 @@ button::after{
     transition:left 0.5s;
 }
 
-button:hover::after{
+.btn:hover::after{
     left:100%;
 }
 
-button:active{
+.btn:active{
     transform:scale(0.96);
-    box-shadow:0 2px 15px var(--pink-glow);
     animation:none;
+}
+
+/* PINK BUTTON (CẤU HÌNH) - GIỜ LÊN TRÊN */
+.btn-pink{
+    color:#831843;
+    background:linear-gradient(135deg,#fce7f3,#f9a8d4);
+    box-shadow:0 4px 20px var(--pink-glow);
+    animation:pulsePink 2.2s infinite;
+    order:1; /* Đặt lên trên */
+}
+
+.btn-pink:active{
+    box-shadow:0 2px 15px var(--pink-glow);
+}
+
+/* BLUE BUTTON (APP) - GIỜ XUỐNG DƯỚI */
+.btn-blue{
+    color:#1e40af;
+    background:linear-gradient(135deg,#dbeafe,#93c5fd);
+    box-shadow:0 4px 20px var(--blue-glow);
+    animation:pulseBlue 2.2s infinite 0.5s;
+    order:2; /* Đặt xuống dưới */
+}
+
+.btn-blue:active{
+    box-shadow:0 2px 15px var(--blue-glow);
+}
+
+/* BUTTON ICONS */
+.btn-icon{
+    font-size:1.2em;
 }
 
 /* LOADING INDICATOR */
 .loading{
     display:none;
-    margin-top:16px;
-    font-size:0.9rem;
+    margin-top:12px;
+    font-size:0.85rem;
     color:var(--muted);
     opacity:0.8;
+    grid-column:1/-1;
+    order:3; /* Đặt cuối cùng */
+}
+
+/* STEP INDICATOR */
+.steps{
+    margin-top:clamp(20px, 5vw, 28px);
+    padding:clamp(16px, 4vw, 20px);
+    background:rgba(255,255,255,.05);
+    border-radius:18px;
+    border:1px solid rgba(255,255,255,.1);
+    text-align:left;
+}
+
+.step{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:12px;
+    font-size:0.9rem;
+}
+
+.step:last-child{
+    margin-bottom:0;
+}
+
+.step-number{
+    min-width:24px;
+    height:24px;
+    background:var(--pink);
+    color:#831843;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    font-size:0.8rem;
 }
 
 /* ANIMATIONS */
@@ -159,13 +235,24 @@ button:active{
     }
 }
 
-@keyframes pulse{
+@keyframes pulsePink{
     0%, 100%{
         box-shadow:0 4px 20px var(--pink-glow);
         transform:scale(1);
     }
     50%{
         box-shadow:0 4px 30px var(--pink-glow);
+        transform:scale(1.02);
+    }
+}
+
+@keyframes pulseBlue{
+    0%, 100%{
+        box-shadow:0 4px 20px var(--blue-glow);
+        transform:scale(1);
+    }
+    50%{
+        box-shadow:0 4px 30px var(--blue-glow);
         transform:scale(1.02);
     }
 }
@@ -208,6 +295,8 @@ button:active{
         --bg:#fdf2f8;
         --pink:#ec4899;
         --pink-glow:rgba(236,72,153,.4);
+        --blue:#3b82f6;
+        --blue-glow:rgba(59,130,246,.3);
         --text:#1f2937;
         --muted:#9d174d;
         --card-bg:rgba(255,255,255,.9);
@@ -221,8 +310,14 @@ button:active{
           var(--bg);
     }
     
-    button{
-        box-shadow:0 4px 20px rgba(236,72,153,.3);
+    .steps{
+        background:rgba(249,168,212,.08);
+        border-color:rgba(236,72,153,.15);
+    }
+    
+    .step-number{
+        background:var(--pink);
+        color:white;
     }
 }
 
@@ -238,9 +333,13 @@ button:active{
         border-radius:22px;
     }
     
-    button{
+    .btn{
         padding:14px;
         font-size:0.9rem;
+    }
+    
+    .steps{
+        padding:14px;
     }
 }
 
@@ -262,7 +361,11 @@ button:active{
         margin-top:8px;
     }
     
-    button{
+    .button-group{
+        margin-top:20px;
+    }
+    
+    .steps{
         margin-top:20px;
     }
 }
@@ -280,51 +383,182 @@ button:active{
 
 <div class="card">
     <div class="emoji">🌸</div>
-    <h1>Xin chào</h1>
+    <h1>Chào mừng đến Locket Gold</h1>
     <p>
-        Chào mừng bạn đến với <b>Locket Gold</b><br>
-        Nhấn nút bên dưới để cài đặt cấu hình<br>
-        Tối ưu & nâng cấp trải nghiệm
+        Để sử dụng tính năng nâng cấp Gold,<br>
+        vui lòng thực hiện theo 2 bước bên dưới
     </p>
 
-    <button onclick="install()" id="installBtn">
-        ⬇️ Tải cấu hình Mobileconfig
-    </button>
+    <div class="button-group">
+        <!-- Bước 1: Cấu hình (GIỜ LÊN TRÊN) -->
+        <button class="btn btn-pink" onclick="installConfig()" id="configBtn">
+            <span class="btn-icon">⬇️</span>
+            <span>Tải cấu hình Mobileconfig</span>
+        </button>
+        
+        <!-- Bước 2: Tải App (GIỜ XUỐNG DƯỚI) -->
+        <button class="btn btn-blue" onclick="downloadApp()" id="appBtn">
+            <span class="btn-icon">📱</span>
+            <span>Tải APP ĐỂ KÍCH HOẠT CẤU HÌNH</span>
+        </button>
+        
+        <div id="loading" class="loading"></div>
+    </div>
     
-    <div id="loading" class="loading">
-        Đang tải cấu hình...
+    <div class="steps">
+        <!-- Cập nhật lại thứ tự các bước -->
+        <div class="step">
+            <div class="step-number">1</div>
+            <div>
+                <strong>Cài đặt cấu hình</strong><br>
+                <small>Tải và cài đặt cấu hình trước</small>
+            </div>
+        </div>
+        <div class="step">
+            <div class="step-number">2</div>
+            <div>
+                <strong>Tải ứng dụng VPN</strong><br>
+                <small>Sau đó tải app để kích hoạt cấu hình</small>
+            </div>
+        </div>
     </div>
 </div>
 
 <script>
-const installBtn = document.getElementById('installBtn');
+const appBtn = document.getElementById('appBtn');
+const configBtn = document.getElementById('configBtn');
 const loadingEl = document.getElementById('loading');
 
-function install(){
-    // Thêm hiệu ứng loading
-    installBtn.disabled = true;
-    installBtn.style.opacity = '0.8';
-    installBtn.style.animation = 'none';
+// Đổi tên hàm để phù hợp với thứ tự mới
+function installConfig(){
+    // Thêm hiệu ứng loading cho config button
+    configBtn.disabled = true;
+    configBtn.style.opacity = '0.8';
+    configBtn.style.animation = 'none';
+    loadingEl.textContent = 'Đang tải cấu hình...';
     loadingEl.style.display = 'block';
     
     // Thêm hiệu ứng tải xuống
-    installBtn.style.animation = 'download 0.5s ease-in-out';
+    configBtn.style.animation = 'download 0.5s ease-in-out';
     
     // Mở mobileconfig
     setTimeout(() => {
         window.open(
-            'https://hoangquann.netlify.app/dns.mobileconfig',
+            'https://webhoangnam.id.vn/dns.mobileconfig',
             '_blank'
         );
         
         // Khôi phục button sau 1.5 giây
         setTimeout(() => {
-            installBtn.disabled = false;
-            installBtn.style.opacity = '1';
-            installBtn.style.animation = 'pulse 2.2s infinite';
+            configBtn.disabled = false;
+            configBtn.style.opacity = '1';
+            configBtn.style.animation = 'pulsePink 2.2s infinite';
             loadingEl.style.display = 'none';
+            
+            // Hiển thị thông báo khuyến khích bước tiếp theo
+            showNextStep();
         }, 1500);
     }, 300);
+}
+
+function downloadApp(){
+    // Thêm hiệu ứng loading cho app button
+    appBtn.disabled = true;
+    appBtn.style.opacity = '0.8';
+    appBtn.style.animation = 'none';
+    loadingEl.textContent = 'Đang mở App Store...';
+    loadingEl.style.display = 'block';
+    
+    // Thêm hiệu ứng tải xuống
+    appBtn.style.animation = 'download 0.5s ease-in-out';
+    
+    // Mở link App Store
+    setTimeout(() => {
+        window.open(
+            'https://apps.apple.com/us/app/usa-vpn-private-fast/id6475051414',
+            '_blank'
+        );
+        
+        // Khôi phục button sau 1.5 giây
+        setTimeout(() => {
+            appBtn.disabled = false;
+            appBtn.style.opacity = '1';
+            appBtn.style.animation = 'pulseBlue 2.2s infinite 0.5s';
+            loadingEl.style.display = 'none';
+            
+            // Hiển thị thông báo hoàn thành
+            showCompletion();
+        }, 1500);
+    }, 300);
+}
+
+function showNextStep(){
+    // Hiển thị thông báo khuyến khích bước tiếp theo
+    const steps = document.querySelector('.steps');
+    const notification = document.createElement('div');
+    notification.innerHTML = `
+        <div style="
+            background: rgba(249, 168, 212, 0.1);
+            border: 1px solid rgba(249, 168, 212, 0.3);
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            animation: fadeIn 0.5s ease-out;
+        ">
+            ✅ Đã tải cấu hình. Vui lòng chuyển sang <strong>Bước 2</strong> để tải app kích hoạt
+        </div>
+    `;
+    
+    // Chèn thông báo vào sau button group
+    const buttonGroup = document.querySelector('.button-group');
+    buttonGroup.parentNode.insertBefore(notification, buttonGroup.nextSibling);
+    
+    // Tự động xóa thông báo sau 5 giây
+    setTimeout(() => {
+        notification.style.opacity = '0';
+        notification.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.parentNode.removeChild(notification);
+            }
+        }, 300);
+    }, 5000);
+}
+
+function showCompletion(){
+    // Hiển thị thông báo hoàn thành
+    const steps = document.querySelector('.steps');
+    const completion = document.createElement('div');
+    completion.innerHTML = `
+        <div style="
+            background: rgba(147, 197, 253, 0.1);
+            border: 1px solid rgba(147, 197, 253, 0.3);
+            border-radius: 12px;
+            padding: 14px;
+            margin-top: 12px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        ">
+            <div style="font-size: 1.2em; margin-bottom: 8px;">🎉</div>
+            <div><strong>Hoàn thành cài đặt!</strong></div>
+            <small>Cấu hình đã được kích hoạt. Bây giờ có thể sử dụng tính năng nâng Gold</small>
+        </div>
+    `;
+    
+    // Chèn thông báo vào sau steps
+    steps.parentNode.insertBefore(completion, steps.nextSibling);
+    
+    // Tự động xóa thông báo sau 8 giây
+    setTimeout(() => {
+        completion.style.opacity = '0';
+        completion.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+            if (completion.parentNode) {
+                completion.parentNode.removeChild(completion);
+            }
+        }, 300);
+    }, 8000);
 }
 
 // Thêm hiệu ứng khi trang tải xong
@@ -334,8 +568,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
     
     if (isIOS && isSafari) {
-        // Có thể thêm thông báo cho iOS Safari nếu cần
-        console.log('iOS Safari detected');
+        console.log('iOS Safari detected - Hiển thị giao diện tối ưu cho iOS');
+        
+        // Có thể thêm hướng dẫn cụ thể cho iOS nếu cần
+        const instructions = document.createElement('div');
+        instructions.innerHTML = `
+            <div style="
+                background: rgba(249, 168, 212, 0.15);
+                border: 1px solid rgba(249, 168, 212, 0.3);
+                border-radius: 12px;
+                padding: 12px;
+                margin-top: 16px;
+                font-size: 0.8rem;
+                text-align: left;
+            ">
+                <strong>📱 Hướng dẫn cho iOS:</strong><br>
+                1. Tải cấu hình → Chọn "Cho phép"<br>
+                2. Vào <strong>Cài đặt → Chung → VPN & Quản lý thiết bị</strong><br>
+                3. Tìm cấu hình vừa tải và nhấn "Cài đặt"<br>
+                4. Sau đó mới tải app để kích hoạt
+            </div>
+        `;
+        
+        // Chèn hướng dẫn vào sau steps
+        const steps = document.querySelector('.steps');
+        if (steps) {
+            steps.parentNode.insertBefore(instructions, steps.nextSibling);
+        }
     }
     
     // Thêm hiệu ứng khi chạm vào card
@@ -347,6 +606,9 @@ document.addEventListener('DOMContentLoaded', () => {
     card.addEventListener('touchend', function() {
         this.style.transform = 'scale(1)';
     });
+    
+    // Tự động tập trung vào nút đầu tiên
+    configBtn.focus({ preventScroll: true });
 });
 </script>
 
