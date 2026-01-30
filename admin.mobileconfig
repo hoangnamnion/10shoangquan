@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>PayloadContent</key>
+	<array>
+		<dict>
+			<key>FullScreen</key>
+			<true/>
+			<key>IgnoreManifestScope</key>
+			<true/>
+			<key>IsRemovable</key>
+			<true/>
+			<key>Label</key>
+			<string>Admin</string>
+			<key>PayloadDisplayName</key>
+			<string>Admin HoangQuann</string>
+			<key>PayloadIdentifier</key>
+			<string>com.apple.webclip.hoangquann.admin</string>
+			<key>PayloadOrganization</key>
+			<string>HoangQuann</string>
+			<key>PayloadType</key>
+			<string>com.apple.webClip.managed</string>
+			<key>PayloadUUID</key>
+			<string>9A3E5F24-7D8B-4A9C-9F21-3B1E8D6C4A77</string>
+			<key>PayloadVersion</key>
+			<integer>1</integer>
+			<key>Precomposed</key>
+			<true/>
+			<key>URL</key>
+			<string>https://hoangquann.netlify.app/admin.html</string>
+			<key>Icon</key>
+			<data>
+iVBORw0KGgoAAAANSUhEUgAAAHgAAAB4CAYAAABx8z3JAAAACXBIWXMAAA7EAAAOxAGVKw4b
+AAABX0lEQVR4nO3QsQ0CMQxF0TtA/6eE0xGkRZgJ2l5oC0mZx9bE8B7kAAAAAAAAAAAAAAADg
+D0f0n1z1m7v1X3H5n2t3+KXf+3b1y9m9l0Z6b0b8ZbP2u3PzX9G9z1kY5Xb9zv0Z8b7WZ+3u2
+eXz2nY6bP2s7z+7uXz3+7u3f3+v2+f7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7
+u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7
+u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7
+u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7u7
+AAAAAAAAAAAAAAD4FQ2GZz0B1Z0YAAAAAElFTkSuQmCC
+			</data>
+		</dict>
+	</array>
+
+	<key>PayloadDisplayName</key>
+	<string>HoangQuann Admin WebClip</string>
+	<key>PayloadIdentifier</key>
+	<string>com.hoangquann.webclip.profile</string>
+	<key>PayloadType</key>
+	<string>Configuration</string>
+	<key>PayloadUUID</key>
+	<string>6D2C1A8F-5E44-4F3B-9A7D-1B2E3C4D5F60</string>
+	<key>PayloadVersion</key>
+	<integer>1</integer>
+</dict>
+</plist>
