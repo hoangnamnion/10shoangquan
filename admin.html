@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Locket Gold API</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+
+<style>
+:root{
+    --bg:#fff1f7;
+    --card:rgba(255,255,255,0.85);
+    --border:rgba(236,72,153,0.25);
+    --text:#3f3f46;
+
+    --pink:#f472b6;
+    --pink-soft:#fce7f3;
+    --pink-glow:rgba(244,114,182,.45);
+
+    --success:#16a34a;
+    --error:#e11d48;
+}
+
+/* RESET + FIX LỆCH */
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent;}
+
+html,body{
+    width:100%;
+    max-width:100%;
+    overflow-x:hidden;
+}
+
+body{
+    font-family:Inter,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    position:relative;
+    padding-left:env(safe-area-inset-left);
+    padding-right:env(safe-area-inset-right);
+}
+
+/* BACKGROUND GRADIENT FIX */
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:
+      radial-gradient(400px 200px at 5% -5%, #fde2f3 0%, transparent 60%),
+      radial-gradient(350px 200px at 95% 5%, #fbcfe8 0%, transparent 60%);
+    z-index:-1;
+}
+
+/* HEADER */
+header{
+    max-width:1000px;
+    margin:0 auto;
+    padding:40px 16px 30px;
+    text-align:center;
+}
+
+header h1{
+    font-size:2rem;
+    font-weight:700;
+    background:linear-gradient(90deg,#ec4899,#f472b6,#fb7185);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+
+header p{
+    margin-top:8px;
+    color:#9d174d;
+    font-size:0.95rem;
+}
+
+/* CONTAINER */
+.container{
+    max-width:1000px;
+    margin:0 auto;
+    padding:0 16px 60px;
+    display:grid;
+    gap:20px;
+}
+
+/* CARD */
+.card{
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:22px;
+    box-shadow:0 8px 30px rgba(236,72,153,.12);
+    overflow:hidden;
+}
+
+.card h2{
+    font-size:1.05rem;
+    margin-bottom:14px;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    color:#be185d;
+}
+
+/* ENDPOINT */
+.endpoint{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.method{
+    background:#fce7f3;
+    color:#9d174d;
+    padding:5px 12px;
+    border-radius:999px;
+    font-weight:700;
+    font-size:0.75rem;
+}
+
+/* CODE */
+pre{
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:16px;
+    overflow:auto;
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.8rem;
+}
+
+code{color:#db2777}
+
+/* INPUT */
+.test{
+    display:grid;
+    gap:12px;
+}
+
+input{
+    width:100%;
+    padding:16px;
+    border-radius:16px;
+    border:1px solid var(--border);
+    font-size:1rem;
+}
+
+button{
+    background:linear-gradient(135deg,#fce7f3,#f472b6);
+    border:none;
+    padding:16px;
+    border-radius:16px;
+    font-weight:700;
+    color:#831843;
+    cursor:pointer;
+    box-shadow:0 6px 20px var(--pink-glow);
+}
+
+button:active{transform:scale(.98)}
+
+.result{
+    min-height:80px;
+    background:#fff;
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:16px;
+    font-family:"JetBrains Mono",monospace;
+    font-size:0.8rem;
+    white-space:pre-wrap;
+}
+
+.success{color:var(--success)}
+.error{color:var(--error)}
+.loading{color:#9ca3af}
+
+/* MOBILE */
+@media (max-width:360px){
+    header h1{font-size:1.7rem}
+    .card{padding:18px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>Locket Gold VIP</h1>
+    <p>Anime Pink • Clean • Mobile First</p>
+</header>
+
+<div class="container">
+
+    <div class="card">
+        <h2>🚀 ADMIN</h2>
+        <div class="endpoint">
+            <span class="method">POST</span>
+            <span>Cấm Chia Sẻ Trang Này Cho Ai Hết</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>📤 Cách Nâng Gold</h2>
+        <pre><code>Vào Locket thấy @locketgold thì nhập: locketgold</code></pre>
+    </div>
+
+    <div class="card">
+        <h2>🧪 Phần Nhập ID Locket</h2>
+        <div class="test">
+            <input id="username" placeholder="Nhập cho đúng không lại lỗi server">
+            <button onclick="test()">Nâng Cấp GOLD</button>
+            <div id="out" class="result">Đang đợi .....</div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+async function test(){
+    const u=document.getElementById('username').value.trim();
+    const out=document.getElementById('out');
+    if(!u){
+        out.innerHTML='<span class="error">Vui lòng nhập username</span>';
+        return;
+    }
+    out.innerHTML='<span class="loading">Đang xử lý…</span>';
+    try{
+        const r=await fetch('https://damp-unit-e8d0.camsempai5.workers.dev/',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({username:u})
+        });
+        const d=await r.json();
+        out.innerHTML=d.success
+            ? '<span class="success">THÀNH CÔNG</span>\n'+JSON.stringify(d,null,2)
+            : '<span class="error">THẤT BẠI</span>\n'+JSON.stringify(d,null,2);
+    }catch(e){
+        out.innerHTML='<span class="error">Lỗi kết nối</span>';
+    }
+}
+</script>
+
+</body>
+</html>
