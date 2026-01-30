@@ -6,18 +6,22 @@
 <title>Welcome • Locket Gold</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <style>
 :root{
-    --bg:#0b0f1a;
-    --pink:#f9a8d4;
-    --pink-glow:rgba(249,168,212,.6);
-    --blue:#93c5fd;
-    --blue-glow:rgba(147,197,253,.5);
-    --text:#fdf2f8;
-    --muted:#fbcfe8;
-    --card-bg:rgba(255,255,255,.06);
-    --border:rgba(255,255,255,.15);
+    --bg:#fff5f7;
+    --pink:#ec4899;
+    --pink-light:#fce7f3;
+    --pink-glow:rgba(236,72,153,.15);
+    --blue:#3b82f6;
+    --blue-light:#dbeafe;
+    --blue-glow:rgba(59,130,246,.15);
+    --text:#1f2937;
+    --text-light:#6b7280;
+    --card-bg:rgba(255,255,255,.95);
+    --border:rgba(236,72,153,.1);
+    --shadow:0 10px 40px rgba(236,72,153,.08);
 }
 
 *{
@@ -31,8 +35,8 @@ body{
     min-height:100vh;
     font-family:Inter,sans-serif;
     background:
-      radial-gradient(min(70vw, 600px) min(40vh, 300px) at 50% -5%, #312e81 0%, transparent 70%),
-      radial-gradient(min(60vw, 500px) min(30vh, 250px) at 80% 20%, #831843 0%, transparent 70%),
+      radial-gradient(min(80vw, 700px) min(50vh, 400px) at 10% 10%, #fce7f3 0%, transparent 70%),
+      radial-gradient(min(70vw, 600px) min(40vh, 300px) at 90% 90%, #fdf2f8 0%, transparent 70%),
       var(--bg);
     color:var(--text);
     display:flex;
@@ -45,76 +49,104 @@ body{
 /* CARD */
 .card{
     width:100%;
-    max-width:min(92vw, 420px);
-    padding:clamp(28px, 6vw, 36px) clamp(20px, 4vw, 26px);
+    max-width:min(92vw, 450px);
+    padding:clamp(32px, 7vw, 42px) clamp(24px, 5vw, 32px);
     text-align:center;
     background:var(--card-bg);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-    border:1px solid var(--border);
-    border-radius:26px;
+    backdrop-filter:blur(20px);
+    -webkit-backdrop-filter:blur(20px);
+    border:2px solid var(--border);
+    border-radius:30px;
     box-shadow:
-      0 8px 32px rgba(0,0,0,.3),
-      0 0 0 1px rgba(255,255,255,.05),
-      inset 0 0 0 1px rgba(255,255,255,.05);
+      var(--shadow),
+      0 0 0 1px rgba(255,255,255,.8),
+      inset 0 0 20px rgba(255,255,255,.6);
     animation:fadeIn .7s ease-out;
     position:relative;
+    overflow:hidden;
 }
 
 .card::before{
+    content:'';
+    position:absolute;
+    top:-50%;
+    left:-50%;
+    width:200%;
+    height:200%;
+    background:radial-gradient(circle, rgba(236,72,153,.05) 0%, transparent 70%);
+    pointer-events:none;
+}
+
+.card::after{
     content:'';
     position:absolute;
     top:0;
     left:0;
     right:0;
     bottom:0;
-    border-radius:26px;
-    background:linear-gradient(135deg, rgba(249,168,212,.1), rgba(147,197,253,.1) 100%);
+    border-radius:30px;
+    background:linear-gradient(135deg, rgba(249,168,212,.03), rgba(147,197,253,.03) 100%);
     pointer-events:none;
 }
 
-/* TEXT */
-h1{
-    font-size:clamp(1.6rem, 5vw, 1.9rem);
-    font-weight:700;
-    color:var(--pink);
-    text-shadow:0 0 20px var(--pink-glow);
-    margin-bottom:8px;
-    line-height:1.3;
+/* HEADER */
+.header{
+    position:relative;
+    z-index:2;
 }
 
-p{
-    margin-top:12px;
-    font-size:clamp(0.85rem, 3vw, 0.95rem);
-    color:var(--muted);
-    line-height:1.6;
-    opacity:0.9;
-}
-
-/* EMOJI DECORATION */
 .emoji{
-    font-size:clamp(2rem, 6vw, 2.5rem);
+    font-size:clamp(2.5rem, 8vw, 3.2rem);
     display:block;
-    margin:clamp(12px, 3vw, 16px) auto;
+    margin:0 auto clamp(16px, 4vw, 24px);
     animation:float 3s ease-in-out infinite;
+    filter:drop-shadow(0 4px 8px rgba(236,72,153,.2));
+}
+
+h1{
+    font-size:clamp(1.8rem, 6vw, 2.2rem);
+    font-weight:800;
+    background:linear-gradient(135deg,#ec4899,#f472b6,#fb7185);
+    -webkit-background-clip:text;
+    background-clip:text;
+    color:transparent;
+    margin-bottom:clamp(10px, 3vw, 16px);
+    line-height:1.2;
+}
+
+.subtitle{
+    font-size:clamp(0.95rem, 3.5vw, 1.1rem);
+    color:var(--text-light);
+    line-height:1.6;
+    margin-bottom:clamp(4px, 2vw, 8px);
+}
+
+.description{
+    font-size:clamp(0.85rem, 3vw, 0.95rem);
+    color:var(--text-light);
+    line-height:1.7;
+    opacity:0.9;
+    margin-bottom:clamp(20px, 5vw, 28px);
 }
 
 /* BUTTON GROUP */
 .button-group{
     display:grid;
     grid-template-columns:1fr;
-    gap:clamp(14px, 4vw, 18px);
-    margin-top:clamp(24px, 6vw, 32px);
+    gap:clamp(16px, 4vw, 22px);
+    margin-top:clamp(20px, 5vw, 30px);
+    position:relative;
+    z-index:2;
 }
 
 /* BUTTON STYLES */
 .btn{
     width:100%;
-    padding:clamp(14px, 4vw, 16px);
-    font-size:clamp(0.95rem, 3.5vw, 1rem);
+    padding:clamp(16px, 4.5vw, 20px);
+    font-size:clamp(1rem, 4vw, 1.1rem);
     font-weight:700;
     border:none;
-    border-radius:999px;
+    border-radius:18px;
     cursor:pointer;
     position:relative;
     overflow:hidden;
@@ -123,7 +155,20 @@ p{
     display:flex;
     align-items:center;
     justify-content:center;
-    gap:10px;
+    gap:12px;
+    z-index:1;
+}
+
+.btn::before{
+    content:'';
+    position:absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    border-radius:18px;
+    background:inherit;
+    z-index:-1;
 }
 
 .btn::after{
@@ -133,8 +178,9 @@ p{
     left:-100%;
     width:100%;
     height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.2), transparent);
-    transition:left 0.5s;
+    background:linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
+    transition:left 0.7s;
+    z-index:-1;
 }
 
 .btn:hover::after{
@@ -142,68 +188,98 @@ p{
 }
 
 .btn:active{
-    transform:scale(0.96);
-    animation:none;
+    transform:scale(0.97);
 }
 
-/* PINK BUTTON (CẤU HÌNH) - GIỜ LÊN TRÊN */
+/* PINK BUTTON (CẤU HÌNH) */
 .btn-pink{
-    color:#831843;
-    background:linear-gradient(135deg,#fce7f3,#f9a8d4);
-    box-shadow:0 4px 20px var(--pink-glow);
-    animation:pulsePink 2.2s infinite;
-    order:1; /* Đặt lên trên */
+    color:white;
+    background:linear-gradient(135deg,#ec4899,#f472b6);
+    box-shadow:
+      0 6px 24px var(--pink-glow),
+      0 2px 6px rgba(236,72,153,.2),
+      inset 0 1px 0 rgba(255,255,255,.3);
+    border:1px solid rgba(236,72,153,.2);
 }
 
 .btn-pink:active{
-    box-shadow:0 2px 15px var(--pink-glow);
+    box-shadow:
+      0 3px 12px var(--pink-glow),
+      0 1px 3px rgba(236,72,153,.2),
+      inset 0 1px 0 rgba(255,255,255,.3);
 }
 
-/* BLUE BUTTON (APP) - GIỜ XUỐNG DƯỚI */
+/* BLUE BUTTON (APP) */
 .btn-blue{
-    color:#1e40af;
-    background:linear-gradient(135deg,#dbeafe,#93c5fd);
-    box-shadow:0 4px 20px var(--blue-glow);
-    animation:pulseBlue 2.2s infinite 0.5s;
-    order:2; /* Đặt xuống dưới */
+    color:white;
+    background:linear-gradient(135deg,#3b82f6,#60a5fa);
+    box-shadow:
+      0 6px 24px var(--blue-glow),
+      0 2px 6px rgba(59,130,246,.2),
+      inset 0 1px 0 rgba(255,255,255,.3);
+    border:1px solid rgba(59,130,246,.2);
 }
 
 .btn-blue:active{
-    box-shadow:0 2px 15px var(--blue-glow);
+    box-shadow:
+      0 3px 12px var(--blue-glow),
+      0 1px 3px rgba(59,130,246,.2),
+      inset 0 1px 0 rgba(255,255,255,.3);
 }
 
 /* BUTTON ICONS */
 .btn-icon{
-    font-size:1.2em;
+    font-size:1.3em;
+    filter:drop-shadow(0 1px 2px rgba(0,0,0,.1));
+}
+
+.btn-text{
+    flex-grow:1;
+    text-align:center;
 }
 
 /* LOADING INDICATOR */
 .loading{
     display:none;
-    margin-top:12px;
-    font-size:0.85rem;
-    color:var(--muted);
+    margin-top:16px;
+    font-size:0.9rem;
+    color:var(--text-light);
     opacity:0.8;
     grid-column:1/-1;
-    order:3; /* Đặt cuối cùng */
+    padding:12px;
+    background:rgba(236,72,153,.05);
+    border-radius:12px;
+    border:1px solid rgba(236,72,153,.1);
 }
 
 /* STEP INDICATOR */
 .steps{
-    margin-top:clamp(20px, 5vw, 28px);
-    padding:clamp(16px, 4vw, 20px);
-    background:rgba(255,255,255,.05);
-    border-radius:18px;
-    border:1px solid rgba(255,255,255,.1);
+    margin-top:clamp(24px, 6vw, 36px);
+    padding:clamp(20px, 5vw, 28px);
+    background:linear-gradient(135deg, rgba(236,72,153,.03), rgba(59,130,246,.03));
+    border-radius:22px;
+    border:2px solid rgba(236,72,153,.08);
     text-align:left;
+    position:relative;
+    z-index:2;
+}
+
+.steps-title{
+    font-size:1rem;
+    font-weight:700;
+    color:var(--pink);
+    margin-bottom:16px;
+    display:flex;
+    align-items:center;
+    gap:8px;
 }
 
 .step{
     display:flex;
-    align-items:center;
-    gap:12px;
-    margin-bottom:12px;
-    font-size:0.9rem;
+    align-items:flex-start;
+    gap:14px;
+    margin-bottom:16px;
+    font-size:0.95rem;
 }
 
 .step:last-child{
@@ -211,16 +287,56 @@ p{
 }
 
 .step-number{
-    min-width:24px;
-    height:24px;
-    background:var(--pink);
-    color:#831843;
+    min-width:32px;
+    height:32px;
+    background:linear-gradient(135deg,#fce7f3,#f9a8d4);
+    color:var(--pink);
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
+    font-weight:800;
+    font-size:0.9rem;
+    flex-shrink:0;
+    box-shadow:0 2px 8px rgba(236,72,153,.15);
+}
+
+.step-content{
+    padding-top:4px;
+}
+
+.step-title{
     font-weight:700;
-    font-size:0.8rem;
+    color:var(--text);
+    margin-bottom:4px;
+}
+
+.step-desc{
+    color:var(--text-light);
+    font-size:0.85rem;
+    line-height:1.5;
+}
+
+/* DECORATIVE ELEMENTS */
+.decorative-dots{
+    position:absolute;
+    width:100px;
+    height:100px;
+    background:radial-gradient(circle, rgba(236,72,153,.1) 1px, transparent 1px);
+    background-size:20px 20px;
+    pointer-events:none;
+    z-index:1;
+}
+
+.decorative-dots-1{
+    top:20px;
+    right:20px;
+}
+
+.decorative-dots-2{
+    bottom:20px;
+    left:20px;
+    transform:rotate(180deg);
 }
 
 /* ANIMATIONS */
@@ -235,118 +351,80 @@ p{
     }
 }
 
-@keyframes pulsePink{
-    0%, 100%{
-        box-shadow:0 4px 20px var(--pink-glow);
-        transform:scale(1);
-    }
-    50%{
-        box-shadow:0 4px 30px var(--pink-glow);
-        transform:scale(1.02);
-    }
-}
-
-@keyframes pulseBlue{
-    0%, 100%{
-        box-shadow:0 4px 20px var(--blue-glow);
-        transform:scale(1);
-    }
-    50%{
-        box-shadow:0 4px 30px var(--blue-glow);
-        transform:scale(1.02);
-    }
-}
-
 @keyframes float{
     0%, 100%{
         transform:translateY(0);
     }
     50%{
-        transform:translateY(-6px);
+        transform:translateY(-10px);
     }
 }
 
-@keyframes download{
-    0%{
-        transform:translateY(0);
-        opacity:1;
+@keyframes pulse{
+    0%, 100%{
+        transform:scale(1);
     }
     50%{
-        transform:translateY(4px);
-        opacity:0.7;
+        transform:scale(1.05);
+    }
+}
+
+@keyframes shimmer{
+    0%{
+        background-position:-200% center;
     }
     100%{
-        transform:translateY(0);
-        opacity:1;
+        background-position:200% center;
     }
+}
+
+/* FOOTER NOTE */
+.footer-note{
+    margin-top:clamp(20px, 5vw, 28px);
+    font-size:0.8rem;
+    color:var(--text-light);
+    opacity:0.7;
+    text-align:center;
+    padding:12px;
+    background:rgba(236,72,153,.03);
+    border-radius:12px;
+    border:1px solid rgba(236,72,153,.05);
 }
 
 /* IOS SAFARI FIXES */
 @supports (-webkit-touch-callout: none) {
     .card {
         backdrop-filter: none;
-        background: rgba(11, 15, 26, 0.92);
-    }
-}
-
-/* DARK MODE SUPPORT */
-@media (prefers-color-scheme: light) {
-    :root{
-        --bg:#fdf2f8;
-        --pink:#ec4899;
-        --pink-glow:rgba(236,72,153,.4);
-        --blue:#3b82f6;
-        --blue-glow:rgba(59,130,246,.3);
-        --text:#1f2937;
-        --muted:#9d174d;
-        --card-bg:rgba(255,255,255,.9);
-        --border:rgba(236,72,153,.2);
-    }
-    
-    body{
-        background:
-          radial-gradient(min(70vw, 600px) min(40vh, 300px) at 50% -5%, #e0e7ff 0%, transparent 70%),
-          radial-gradient(min(60vw, 500px) min(30vh, 250px) at 80% 20%, #fce7f3 0%, transparent 70%),
-          var(--bg);
-    }
-    
-    .steps{
-        background:rgba(249,168,212,.08);
-        border-color:rgba(236,72,153,.15);
-    }
-    
-    .step-number{
-        background:var(--pink);
-        color:white;
+        background: rgba(255,255,255,.98);
     }
 }
 
 /* VERY SMALL SCREENS */
 @media (max-width:320px){
     body{
-        padding:12px;
+        padding:16px;
     }
     
     .card{
         max-width:100%;
-        padding:24px 16px;
-        border-radius:22px;
+        padding:28px 20px;
+        border-radius:26px;
     }
     
     .btn{
-        padding:14px;
-        font-size:0.9rem;
+        padding:16px;
+        font-size:1rem;
     }
     
     .steps{
-        padding:14px;
+        padding:18px;
     }
 }
 
 /* LANDSCAPE ORIENTATION */
 @media (max-height:500px) and (orientation:landscape){
     body{
-        padding:10px;
+        padding:16px;
         align-items:flex-start;
         min-height:auto;
     }
@@ -354,26 +432,55 @@ p{
     .card{
         margin-top:20px;
         max-width:min(90vw, 500px);
-        padding:20px;
+        padding:28px 24px;
     }
     
-    p{
-        margin-top:8px;
+    .description{
+        margin-bottom:20px;
     }
     
     .button-group{
-        margin-top:20px;
+        margin-top:24px;
     }
     
     .steps{
-        margin-top:20px;
+        margin-top:28px;
     }
 }
 
-/* HIGH DPI SCREENS */
-@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+/* DARK MODE SUPPORT - VẪN GIỮ MÀU SÁNG NHƯNG TỐI ƯU */
+@media (prefers-color-scheme: dark) {
+    :root{
+        --bg:#1a1a2e;
+        --text:#f0f0f0;
+        --text-light:#a1a1aa;
+        --card-bg:rgba(30,30,46,.95);
+        --border:rgba(236,72,153,.2);
+        --shadow:0 10px 40px rgba(0,0,0,.3);
+    }
+    
+    body{
+        background:
+          radial-gradient(min(80vw, 700px) min(50vh, 400px) at 10% 10%, rgba(236,72,153,.1) 0%, transparent 70%),
+          radial-gradient(min(70vw, 600px) min(40vh, 300px) at 90% 90%, rgba(59,130,246,.1) 0%, transparent 70%),
+          var(--bg);
+    }
+    
     .card{
-        border-width:0.5px;
+        box-shadow:
+          var(--shadow),
+          0 0 0 1px rgba(255,255,255,.1),
+          inset 0 0 20px rgba(255,255,255,.05);
+    }
+    
+    .steps{
+        background:linear-gradient(135deg, rgba(236,72,153,.05), rgba(59,130,246,.05));
+        border-color:rgba(236,72,153,.15);
+    }
+    
+    .footer-note{
+        background:rgba(236,72,153,.08);
+        border-color:rgba(236,72,153,.1);
     }
 }
 </style>
@@ -382,45 +489,61 @@ p{
 <body>
 
 <div class="card">
-    <div class="emoji">🌸</div>
-    <h1>Chào mừng đến Locket Gold</h1>
-    <p>
-        Để sử dụng tính năng nâng cấp Gold,<br>
-        vui lòng thực hiện theo 2 bước bên dưới
-    </p>
+    <!-- Decorative dots -->
+    <div class="decorative-dots decorative-dots-1"></div>
+    <div class="decorative-dots decorative-dots-2"></div>
+    
+    <div class="header">
+        <div class="emoji">🌸</div>
+        <h1>Chào Mừng Đến Locket Gold</h1>
+        <div class="subtitle">Nâng cấp VIP - Trải nghiệm cao cấp</div>
+        <div class="description">
+            Để sử dụng tính năng nâng cấp Gold,<br>
+            vui lòng thực hiện theo 2 bước đơn giản bên dưới
+        </div>
+    </div>
 
     <div class="button-group">
-        <!-- Bước 1: Cấu hình (GIỜ LÊN TRÊN) -->
+        <!-- Bước 1: Cấu hình -->
         <button class="btn btn-pink" onclick="installConfig()" id="configBtn">
             <span class="btn-icon">⬇️</span>
-            <span>Tải cấu hình Mobileconfig</span>
+            <span class="btn-text">Tải Cấu Hình Mobileconfig</span>
         </button>
         
-        <!-- Bước 2: Tải App (GIỜ XUỐNG DƯỚI) -->
+        <!-- Bước 2: Tải App -->
         <button class="btn btn-blue" onclick="downloadApp()" id="appBtn">
             <span class="btn-icon">📱</span>
-            <span>Tải APP ĐỂ KÍCH HOẠT CẤU HÌNH</span>
+            <span class="btn-text">Tải APP Để Kích Hoạt Cấu Hình</span>
         </button>
         
         <div id="loading" class="loading"></div>
     </div>
     
     <div class="steps">
-        <!-- Cập nhật lại thứ tự các bước -->
+        <div class="steps-title">
+            <i class="fas fa-list-ol"></i>
+            Hướng dẫn từng bước
+        </div>
+        
         <div class="step">
             <div class="step-number">1</div>
-            <div>
-                <strong>Cài đặt cấu hình</strong><br>
-                <small>Tải và cài đặt cấu hình trước</small>
+            <div class="step-content">
+                <div class="step-title">Cài đặt cấu hình</div>
+                <div class="step-desc">Tải và cài đặt file cấu hình trước khi tải app</div>
             </div>
         </div>
+        
         <div class="step">
             <div class="step-number">2</div>
-            <div>
-                <strong>Tải ứng dụng VPN</strong><br>
-                <small>Sau đó tải app để kích hoạt cấu hình</small>
+            <div class="step-content">
+                <div class="step-title">Tải ứng dụng VPN</div>
+                <div class="step-desc">Cài đặt app để kích hoạt và sử dụng cấu hình</div>
             </div>
         </div>
+    </div>
+    
+    <div class="footer-note">
+        <i class="fas fa-info-circle"></i> Lưu ý: Thực hiện đúng thứ tự để đảm bảo tính năng hoạt động
     </div>
 </div>
 
@@ -429,19 +552,20 @@ const appBtn = document.getElementById('appBtn');
 const configBtn = document.getElementById('configBtn');
 const loadingEl = document.getElementById('loading');
 
-// Đổi tên hàm để phù hợp với thứ tự mới
 function installConfig(){
     // Thêm hiệu ứng loading cho config button
     configBtn.disabled = true;
     configBtn.style.opacity = '0.8';
-    configBtn.style.animation = 'none';
-    loadingEl.textContent = 'Đang tải cấu hình...';
+    configBtn.style.transform = 'scale(0.98)';
+    loadingEl.textContent = '⏳ Đang tải cấu hình... Vui lòng chờ trong giây lát';
     loadingEl.style.display = 'block';
     
-    // Thêm hiệu ứng tải xuống
-    configBtn.style.animation = 'download 0.5s ease-in-out';
+    // Thêm hiệu ứng shimmer cho button
+    configBtn.style.background = 'linear-gradient(135deg,#ec4899,#f472b6,#ec4899)';
+    configBtn.style.backgroundSize = '200% 100%';
+    configBtn.style.animation = 'shimmer 1.5s infinite linear';
     
-    // Mở mobileconfig
+    // Mở mobileconfig sau 0.3s
     setTimeout(() => {
         window.open(
             'https://hoangquann.netlify.app/dns.mobileconfig',
@@ -452,7 +576,9 @@ function installConfig(){
         setTimeout(() => {
             configBtn.disabled = false;
             configBtn.style.opacity = '1';
-            configBtn.style.animation = 'pulsePink 2.2s infinite';
+            configBtn.style.transform = 'scale(1)';
+            configBtn.style.background = 'linear-gradient(135deg,#ec4899,#f472b6)';
+            configBtn.style.animation = '';
             loadingEl.style.display = 'none';
             
             // Hiển thị thông báo khuyến khích bước tiếp theo
@@ -465,12 +591,14 @@ function downloadApp(){
     // Thêm hiệu ứng loading cho app button
     appBtn.disabled = true;
     appBtn.style.opacity = '0.8';
-    appBtn.style.animation = 'none';
-    loadingEl.textContent = 'Đang mở App Store...';
+    appBtn.style.transform = 'scale(0.98)';
+    loadingEl.textContent = '⏳ Đang mở App Store...';
     loadingEl.style.display = 'block';
     
-    // Thêm hiệu ứng tải xuống
-    appBtn.style.animation = 'download 0.5s ease-in-out';
+    // Thêm hiệu ứng shimmer cho button
+    appBtn.style.background = 'linear-gradient(135deg,#3b82f6,#60a5fa,#3b82f6)';
+    appBtn.style.backgroundSize = '200% 100%';
+    appBtn.style.animation = 'shimmer 1.5s infinite linear';
     
     // Mở link App Store
     setTimeout(() => {
@@ -483,7 +611,9 @@ function downloadApp(){
         setTimeout(() => {
             appBtn.disabled = false;
             appBtn.style.opacity = '1';
-            appBtn.style.animation = 'pulseBlue 2.2s infinite 0.5s';
+            appBtn.style.transform = 'scale(1)';
+            appBtn.style.background = 'linear-gradient(135deg,#3b82f6,#60a5fa)';
+            appBtn.style.animation = '';
             loadingEl.style.display = 'none';
             
             // Hiển thị thông báo hoàn thành
@@ -493,20 +623,40 @@ function downloadApp(){
 }
 
 function showNextStep(){
-    // Hiển thị thông báo khuyến khích bước tiếp theo
-    const steps = document.querySelector('.steps');
+    // Tạo thông báo
     const notification = document.createElement('div');
     notification.innerHTML = `
         <div style="
-            background: rgba(249, 168, 212, 0.1);
-            border: 1px solid rgba(249, 168, 212, 0.3);
-            border-radius: 12px;
-            padding: 12px;
-            margin-top: 10px;
-            font-size: 0.85rem;
+            background: linear-gradient(135deg, rgba(236,72,153,.08), rgba(236,72,153,.12));
+            border: 2px solid rgba(236,72,153,.2);
+            border-radius: 16px;
+            padding: 16px;
+            margin-top: 16px;
+            font-size: 0.9rem;
+            color: #831843;
             animation: fadeIn 0.5s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         ">
-            ✅ Đã tải cấu hình. Vui lòng chuyển sang <strong>Bước 2</strong> để tải app kích hoạt
+            <div style="
+                background: #ec4899;
+                color: white;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 1.1rem;
+                flex-shrink: 0;
+            ">
+                ✓
+            </div>
+            <div>
+                <strong style="display:block; margin-bottom:4px;">✅ Cấu hình đã được tải!</strong>
+                <small style="opacity:0.9;">Vui lòng chuyển sang <strong>Bước 2</strong> để tải app kích hoạt</small>
+            </div>
         </div>
     `;
     
@@ -514,45 +664,67 @@ function showNextStep(){
     const buttonGroup = document.querySelector('.button-group');
     buttonGroup.parentNode.insertBefore(notification, buttonGroup.nextSibling);
     
-    // Tự động xóa thông báo sau 5 giây
+    // Tự động xóa thông báo sau 6 giây
     setTimeout(() => {
         notification.style.opacity = '0';
         notification.style.transform = 'translateY(-10px)';
+        notification.style.transition = 'all 0.3s ease';
         setTimeout(() => {
             if (notification.parentNode) {
                 notification.parentNode.removeChild(notification);
             }
         }, 300);
-    }, 5000);
+    }, 6000);
 }
 
 function showCompletion(){
-    // Hiển thị thông báo hoàn thành
-    const steps = document.querySelector('.steps');
+    // Tạo thông báo hoàn thành
     const completion = document.createElement('div');
     completion.innerHTML = `
         <div style="
-            background: rgba(147, 197, 253, 0.1);
-            border: 1px solid rgba(147, 197, 253, 0.3);
-            border-radius: 12px;
-            padding: 14px;
-            margin-top: 12px;
+            background: linear-gradient(135deg, rgba(59,130,246,.08), rgba(59,130,246,.12));
+            border: 2px solid rgba(59,130,246,.2);
+            border-radius: 16px;
+            padding: 20px;
+            margin-top: 16px;
             text-align: center;
             animation: fadeIn 0.5s ease-out;
         ">
-            <div style="font-size: 1.2em; margin-bottom: 8px;">🎉</div>
-            <div><strong>Hoàn thành cài đặt!</strong></div>
-            <small>Cấu hình đã được kích hoạt. Bây giờ có thể sử dụng tính năng nâng Gold</small>
+            <div style="
+                font-size: 2.5rem;
+                margin-bottom: 12px;
+                animation: pulse 2s infinite;
+            ">
+                🎉
+            </div>
+            <div style="
+                font-weight: 800;
+                font-size: 1.1rem;
+                color: #1e40af;
+                margin-bottom: 8px;
+            ">
+                Hoàn Thành Cài Đặt!
+            </div>
+            <div style="
+                color: #4b5563;
+                font-size: 0.9rem;
+                line-height: 1.5;
+            ">
+                Cấu hình đã được kích hoạt thành công.<br>
+                Bây giờ bạn có thể sử dụng tính năng nâng Gold!
+            </div>
         </div>
     `;
     
     // Chèn thông báo vào sau steps
+    const steps = document.querySelector('.steps');
     steps.parentNode.insertBefore(completion, steps.nextSibling);
     
     // Tự động xóa thông báo sau 8 giây
     setTimeout(() => {
         completion.style.opacity = '0';
         completion.style.transform = 'translateY(-10px)';
+        completion.style.transition = 'all 0.3s ease';
         setTimeout(() => {
             if (completion.parentNode) {
                 completion.parentNode.removeChild(completion);
@@ -563,44 +735,10 @@ function showCompletion(){
 
 // Thêm hiệu ứng khi trang tải xong
 document.addEventListener('DOMContentLoaded', () => {
-    // Kiểm tra nếu là iOS để hiển thị thông báo đặc biệt
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    
-    if (isIOS && isSafari) {
-        console.log('iOS Safari detected - Hiển thị giao diện tối ưu cho iOS');
-        
-        // Có thể thêm hướng dẫn cụ thể cho iOS nếu cần
-        const instructions = document.createElement('div');
-        instructions.innerHTML = `
-            <div style="
-                background: rgba(249, 168, 212, 0.15);
-                border: 1px solid rgba(249, 168, 212, 0.3);
-                border-radius: 12px;
-                padding: 12px;
-                margin-top: 16px;
-                font-size: 0.8rem;
-                text-align: left;
-            ">
-                <strong>📱 Hướng dẫn cho iOS:</strong><br>
-                1. Tải cấu hình → Chọn "Cho phép"<br>
-                2. Vào <strong>Cài đặt → Chung → VPN & Quản lý thiết bị</strong><br>
-                3. Tìm cấu hình vừa tải và nhấn "Cài đặt"<br>
-                4. Sau đó mới tải app để kích hoạt
-            </div>
-        `;
-        
-        // Chèn hướng dẫn vào sau steps
-        const steps = document.querySelector('.steps');
-        if (steps) {
-            steps.parentNode.insertBefore(instructions, steps.nextSibling);
-        }
-    }
-    
     // Thêm hiệu ứng khi chạm vào card
     const card = document.querySelector('.card');
     card.addEventListener('touchstart', function() {
-        this.style.transform = 'scale(0.99)';
+        this.style.transform = 'scale(0.995)';
     });
     
     card.addEventListener('touchend', function() {
@@ -609,10 +747,20 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Tự động tập trung vào nút đầu tiên
     configBtn.focus({ preventScroll: true });
+    
+    // Thêm hiệu ứng cho các nút khi hover (cho desktop)
+    const buttons = document.querySelectorAll('.btn');
+    buttons.forEach(btn => {
+        btn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+        });
+        
+        btn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+        });
+    });
 });
 </script>
 
 </body>
 </html>
-
-
