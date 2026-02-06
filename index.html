@@ -1,766 +1,920 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Welcome • Locket Gold</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-<style>
-:root{
-    --bg:#fff5f7;
-    --pink:#ec4899;
-    --pink-light:#fce7f3;
-    --pink-glow:rgba(236,72,153,.15);
-    --blue:#3b82f6;
-    --blue-light:#dbeafe;
-    --blue-glow:rgba(59,130,246,.15);
-    --text:#1f2937;
-    --text-light:#6b7280;
-    --card-bg:rgba(255,255,255,.95);
-    --border:rgba(236,72,153,.1);
-    --shadow:0 10px 40px rgba(236,72,153,.08);
-}
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-    -webkit-tap-highlight-color: transparent;
-}
-
-body{
-    min-height:100vh;
-    font-family:Inter,sans-serif;
-    background:
-      radial-gradient(min(80vw, 700px) min(50vh, 400px) at 10% 10%, #fce7f3 0%, transparent 70%),
-      radial-gradient(min(70vw, 600px) min(40vh, 300px) at 90% 90%, #fdf2f8 0%, transparent 70%),
-      var(--bg);
-    color:var(--text);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    overflow-x: hidden;
-}
-
-/* CARD */
-.card{
-    width:100%;
-    max-width:min(92vw, 450px);
-    padding:clamp(32px, 7vw, 42px) clamp(24px, 5vw, 32px);
-    text-align:center;
-    background:var(--card-bg);
-    backdrop-filter:blur(20px);
-    -webkit-backdrop-filter:blur(20px);
-    border:2px solid var(--border);
-    border-radius:30px;
-    box-shadow:
-      var(--shadow),
-      0 0 0 1px rgba(255,255,255,.8),
-      inset 0 0 20px rgba(255,255,255,.6);
-    animation:fadeIn .7s ease-out;
-    position:relative;
-    overflow:hidden;
-}
-
-.card::before{
-    content:'';
-    position:absolute;
-    top:-50%;
-    left:-50%;
-    width:200%;
-    height:200%;
-    background:radial-gradient(circle, rgba(236,72,153,.05) 0%, transparent 70%);
-    pointer-events:none;
-}
-
-.card::after{
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    border-radius:30px;
-    background:linear-gradient(135deg, rgba(249,168,212,.03), rgba(147,197,253,.03) 100%);
-    pointer-events:none;
-}
-
-/* HEADER */
-.header{
-    position:relative;
-    z-index:2;
-}
-
-.emoji{
-    font-size:clamp(2.5rem, 8vw, 3.2rem);
-    display:block;
-    margin:0 auto clamp(16px, 4vw, 24px);
-    animation:float 3s ease-in-out infinite;
-    filter:drop-shadow(0 4px 8px rgba(236,72,153,.2));
-}
-
-h1{
-    font-size:clamp(1.8rem, 6vw, 2.2rem);
-    font-weight:800;
-    background:linear-gradient(135deg,#ec4899,#f472b6,#fb7185);
-    -webkit-background-clip:text;
-    background-clip:text;
-    color:transparent;
-    margin-bottom:clamp(10px, 3vw, 16px);
-    line-height:1.2;
-}
-
-.subtitle{
-    font-size:clamp(0.95rem, 3.5vw, 1.1rem);
-    color:var(--text-light);
-    line-height:1.6;
-    margin-bottom:clamp(4px, 2vw, 8px);
-}
-
-.description{
-    font-size:clamp(0.85rem, 3vw, 0.95rem);
-    color:var(--text-light);
-    line-height:1.7;
-    opacity:0.9;
-    margin-bottom:clamp(20px, 5vw, 28px);
-}
-
-/* BUTTON GROUP */
-.button-group{
-    display:grid;
-    grid-template-columns:1fr;
-    gap:clamp(16px, 4vw, 22px);
-    margin-top:clamp(20px, 5vw, 30px);
-    position:relative;
-    z-index:2;
-}
-
-/* BUTTON STYLES */
-.btn{
-    width:100%;
-    padding:clamp(16px, 4.5vw, 20px);
-    font-size:clamp(1rem, 4vw, 1.1rem);
-    font-weight:700;
-    border:none;
-    border-radius:18px;
-    cursor:pointer;
-    position:relative;
-    overflow:hidden;
-    transition:all 0.3s ease;
-    touch-action:manipulation;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    z-index:1;
-}
-
-.btn::before{
-    content:'';
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    border-radius:18px;
-    background:inherit;
-    z-index:-1;
-}
-
-.btn::after{
-    content:'';
-    position:absolute;
-    top:0;
-    left:-100%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(90deg, transparent, rgba(255,255,255,.4), transparent);
-    transition:left 0.7s;
-    z-index:-1;
-}
-
-.btn:hover::after{
-    left:100%;
-}
-
-.btn:active{
-    transform:scale(0.97);
-}
-
-/* PINK BUTTON (CẤU HÌNH) */
-.btn-pink{
-    color:white;
-    background:linear-gradient(135deg,#ec4899,#f472b6);
-    box-shadow:
-      0 6px 24px var(--pink-glow),
-      0 2px 6px rgba(236,72,153,.2),
-      inset 0 1px 0 rgba(255,255,255,.3);
-    border:1px solid rgba(236,72,153,.2);
-}
-
-.btn-pink:active{
-    box-shadow:
-      0 3px 12px var(--pink-glow),
-      0 1px 3px rgba(236,72,153,.2),
-      inset 0 1px 0 rgba(255,255,255,.3);
-}
-
-/* BLUE BUTTON (APP) */
-.btn-blue{
-    color:white;
-    background:linear-gradient(135deg,#3b82f6,#60a5fa);
-    box-shadow:
-      0 6px 24px var(--blue-glow),
-      0 2px 6px rgba(59,130,246,.2),
-      inset 0 1px 0 rgba(255,255,255,.3);
-    border:1px solid rgba(59,130,246,.2);
-}
-
-.btn-blue:active{
-    box-shadow:
-      0 3px 12px var(--blue-glow),
-      0 1px 3px rgba(59,130,246,.2),
-      inset 0 1px 0 rgba(255,255,255,.3);
-}
-
-/* BUTTON ICONS */
-.btn-icon{
-    font-size:1.3em;
-    filter:drop-shadow(0 1px 2px rgba(0,0,0,.1));
-}
-
-.btn-text{
-    flex-grow:1;
-    text-align:center;
-}
-
-/* LOADING INDICATOR */
-.loading{
-    display:none;
-    margin-top:16px;
-    font-size:0.9rem;
-    color:var(--text-light);
-    opacity:0.8;
-    grid-column:1/-1;
-    padding:12px;
-    background:rgba(236,72,153,.05);
-    border-radius:12px;
-    border:1px solid rgba(236,72,153,.1);
-}
-
-/* STEP INDICATOR */
-.steps{
-    margin-top:clamp(24px, 6vw, 36px);
-    padding:clamp(20px, 5vw, 28px);
-    background:linear-gradient(135deg, rgba(236,72,153,.03), rgba(59,130,246,.03));
-    border-radius:22px;
-    border:2px solid rgba(236,72,153,.08);
-    text-align:left;
-    position:relative;
-    z-index:2;
-}
-
-.steps-title{
-    font-size:1rem;
-    font-weight:700;
-    color:var(--pink);
-    margin-bottom:16px;
-    display:flex;
-    align-items:center;
-    gap:8px;
-}
-
-.step{
-    display:flex;
-    align-items:flex-start;
-    gap:14px;
-    margin-bottom:16px;
-    font-size:0.95rem;
-}
-
-.step:last-child{
-    margin-bottom:0;
-}
-
-.step-number{
-    min-width:32px;
-    height:32px;
-    background:linear-gradient(135deg,#fce7f3,#f9a8d4);
-    color:var(--pink);
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-weight:800;
-    font-size:0.9rem;
-    flex-shrink:0;
-    box-shadow:0 2px 8px rgba(236,72,153,.15);
-}
-
-.step-content{
-    padding-top:4px;
-}
-
-.step-title{
-    font-weight:700;
-    color:var(--text);
-    margin-bottom:4px;
-}
-
-.step-desc{
-    color:var(--text-light);
-    font-size:0.85rem;
-    line-height:1.5;
-}
-
-/* DECORATIVE ELEMENTS */
-.decorative-dots{
-    position:absolute;
-    width:100px;
-    height:100px;
-    background:radial-gradient(circle, rgba(236,72,153,.1) 1px, transparent 1px);
-    background-size:20px 20px;
-    pointer-events:none;
-    z-index:1;
-}
-
-.decorative-dots-1{
-    top:20px;
-    right:20px;
-}
-
-.decorative-dots-2{
-    bottom:20px;
-    left:20px;
-    transform:rotate(180deg);
-}
-
-/* ANIMATIONS */
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:translateY(20px) scale(0.98);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0) scale(1);
-    }
-}
-
-@keyframes float{
-    0%, 100%{
-        transform:translateY(0);
-    }
-    50%{
-        transform:translateY(-10px);
-    }
-}
-
-@keyframes pulse{
-    0%, 100%{
-        transform:scale(1);
-    }
-    50%{
-        transform:scale(1.05);
-    }
-}
-
-@keyframes shimmer{
-    0%{
-        background-position:-200% center;
-    }
-    100%{
-        background-position:200% center;
-    }
-}
-
-/* FOOTER NOTE */
-.footer-note{
-    margin-top:clamp(20px, 5vw, 28px);
-    font-size:0.8rem;
-    color:var(--text-light);
-    opacity:0.7;
-    text-align:center;
-    padding:12px;
-    background:rgba(236,72,153,.03);
-    border-radius:12px;
-    border:1px solid rgba(236,72,153,.05);
-}
-
-/* IOS SAFARI FIXES */
-@supports (-webkit-touch-callout: none) {
-    .card {
-        backdrop-filter: none;
-        background: rgba(255,255,255,.98);
-    }
-}
-
-/* VERY SMALL SCREENS */
-@media (max-width:320px){
-    body{
-        padding:16px;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tải Locket Widget - IPA Cho iOS</title>
+    <meta name="description" content="Tải Locket Widget phiên bản 2.31.1 cho iPhone/iPad iOS. Liên kết cài đặt an toàn và nhanh chóng.">
+    <meta name="keywords" content="Locket Widget, iOS, iPhone, iPad, cài đặt, IPA">
+    <meta name="author" content="IPA Provider">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Vietnamese">
+    <meta name="theme-color" content="#ff6b9d">
     
-    .card{
-        max-width:100%;
-        padding:28px 20px;
-        border-radius:26px;
-    }
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    .btn{
-        padding:16px;
-        font-size:1rem;
-    }
-    
-    .steps{
-        padding:18px;
-    }
-}
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-/* LANDSCAPE ORIENTATION */
-@media (max-height:500px) and (orientation:landscape){
-    body{
-        padding:16px;
-        align-items:flex-start;
-        min-height:auto;
-    }
-    
-    .card{
-        margin-top:20px;
-        max-width:min(90vw, 500px);
-        padding:28px 24px;
-    }
-    
-    .description{
-        margin-bottom:20px;
-    }
-    
-    .button-group{
-        margin-top:24px;
-    }
-    
-    .steps{
-        margin-top:28px;
-    }
-}
+        :root {
+            --primary-pink: #ff6b9d;
+            --secondary-pink: #ff4d87;
+            --light-pink: #fff5f8;
+            --blue: #4d8cff;
+            --light-blue: #e6f0ff;
+            --purple: #9d4dff;
+            --orange: #ff8c4d;
+            --white: #ffffff;
+            --dark-bg: #0a0a1a;
+            --card-bg: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --shadow: 0 10px 30px rgba(255, 107, 157, 0.15);
+            --glow: 0 0 20px rgba(255, 107, 157, 0.3);
+        }
 
-/* DARK MODE SUPPORT - VẪN GIỮ MÀU SÁNG NHƯNG TỐI ƯU */
-@media (prefers-color-scheme: dark) {
-    :root{
-        --bg:#1a1a2e;
-        --text:#f0f0f0;
-        --text-light:#a1a1aa;
-        --card-bg:rgba(30,30,46,.95);
-        --border:rgba(236,72,153,.2);
-        --shadow:0 10px 40px rgba(0,0,0,.3);
-    }
-    
-    body{
-        background:
-          radial-gradient(min(80vw, 700px) min(50vh, 400px) at 10% 10%, rgba(236,72,153,.1) 0%, transparent 70%),
-          radial-gradient(min(70vw, 600px) min(40vh, 300px) at 90% 90%, rgba(59,130,246,.1) 0%, transparent 70%),
-          var(--bg);
-    }
-    
-    .card{
-        box-shadow:
-          var(--shadow),
-          0 0 0 1px rgba(255,255,255,.1),
-          inset 0 0 20px rgba(255,255,255,.05);
-    }
-    
-    .steps{
-        background:linear-gradient(135deg, rgba(236,72,153,.05), rgba(59,130,246,.05));
-        border-color:rgba(236,72,153,.15);
-    }
-    
-    .footer-note{
-        background:rgba(236,72,153,.08);
-        border-color:rgba(236,72,153,.1);
-    }
-}
-</style>
-</head>
-
-<body>
-
-<div class="card">
-    <!-- Decorative dots -->
-    <div class="decorative-dots decorative-dots-1"></div>
-    <div class="decorative-dots decorative-dots-2"></div>
-    
-    <div class="header">
-        <div class="emoji">🌸</div>
-        <h1>Chào Mừng Đến Locket Gold</h1>
-        <div class="subtitle">Nâng cấp VIP - Trải nghiệm cao cấp</div>
-        <div class="description">
-            Để sử dụng tính năng nâng cấp Gold,<br>
-            vui lòng thực hiện theo 2 bước đơn giản bên dưới
-        </div>
-    </div>
-
-    <div class="button-group">
-        <!-- Bước 1: Cấu hình -->
-        <button class="btn btn-pink" onclick="installConfig()" id="configBtn">
-            <span class="btn-icon">⬇️</span>
-            <span class="btn-text">Tải Cấu Hình Mobileconfig</span>
-        </button>
-        
-        <!-- Bước 2: Tải App -->
-        <button class="btn btn-blue" onclick="downloadApp()" id="appBtn">
-            <span class="btn-icon">📱</span>
-            <span class="btn-text">Tải APP Để Kích Hoạt Cấu Hình</span>
-        </button>
-        
-        <div id="loading" class="loading"></div>
-    </div>
-    
-    <div class="steps">
-        <div class="steps-title">
-            <i class="fas fa-list-ol"></i>
-            Hướng dẫn từng bước
-        </div>
-        
-        <div class="step">
-            <div class="step-number">1</div>
-            <div class="step-content">
-                <div class="step-title">Cài đặt cấu hình</div>
-                <div class="step-desc">Tải và cài đặt file cấu hình trước khi tải app</div>
-            </div>
-        </div>
-        
-        <div class="step">
-            <div class="step-number">2</div>
-            <div class="step-content">
-                <div class="step-title">Tải ứng dụng VPN</div>
-                <div class="step-desc">Cài đặt app để kích hoạt và sử dụng cấu hình</div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="footer-note">
-        <i class="fas fa-info-circle"></i> Lưu ý: Thực hiện đúng thứ tự để đảm bảo tính năng hoạt động
-    </div>
-</div>
-
-<script>
-const appBtn = document.getElementById('appBtn');
-const configBtn = document.getElementById('configBtn');
-const loadingEl = document.getElementById('loading');
-
-function installConfig(){
-    // Thêm hiệu ứng loading cho config button
-    configBtn.disabled = true;
-    configBtn.style.opacity = '0.8';
-    configBtn.style.transform = 'scale(0.98)';
-    loadingEl.textContent = '⏳ Đang tải cấu hình... Vui lòng chờ trong giây lát';
-    loadingEl.style.display = 'block';
-    
-    // Thêm hiệu ứng shimmer cho button
-    configBtn.style.background = 'linear-gradient(135deg,#ec4899,#f472b6,#ec4899)';
-    configBtn.style.backgroundSize = '200% 100%';
-    configBtn.style.animation = 'shimmer 1.5s infinite linear';
-    
-    // Mở mobileconfig sau 0.3s
-    setTimeout(() => {
-        window.open(
-            'https://hoangquann.netlify.app/dns.mobileconfig',
-            '_blank'
-        );
-        
-        // Khôi phục button sau 1.5 giây
-        setTimeout(() => {
-            configBtn.disabled = false;
-            configBtn.style.opacity = '1';
-            configBtn.style.transform = 'scale(1)';
-            configBtn.style.background = 'linear-gradient(135deg,#ec4899,#f472b6)';
-            configBtn.style.animation = '';
-            loadingEl.style.display = 'none';
-            
-            // Hiển thị thông báo khuyến khích bước tiếp theo
-            showNextStep();
-        }, 1500);
-    }, 300);
-}
-
-function downloadApp(){
-    // Thêm hiệu ứng loading cho app button
-    appBtn.disabled = true;
-    appBtn.style.opacity = '0.8';
-    appBtn.style.transform = 'scale(0.98)';
-    loadingEl.textContent = '⏳ Đang mở App Store...';
-    loadingEl.style.display = 'block';
-    
-    // Thêm hiệu ứng shimmer cho button
-    appBtn.style.background = 'linear-gradient(135deg,#3b82f6,#60a5fa,#3b82f6)';
-    appBtn.style.backgroundSize = '200% 100%';
-    appBtn.style.animation = 'shimmer 1.5s infinite linear';
-    
-    // Mở link App Store
-    setTimeout(() => {
-        window.open(
-            'https://apps.apple.com/us/app/usa-vpn-private-fast/id6475051414',
-            '_blank'
-        );
-        
-        // Khôi phục button sau 1.5 giây
-        setTimeout(() => {
-            appBtn.disabled = false;
-            appBtn.style.opacity = '1';
-            appBtn.style.transform = 'scale(1)';
-            appBtn.style.background = 'linear-gradient(135deg,#3b82f6,#60a5fa)';
-            appBtn.style.animation = '';
-            loadingEl.style.display = 'none';
-            
-            // Hiển thị thông báo hoàn thành
-            showCompletion();
-        }, 1500);
-    }, 300);
-}
-
-function showNextStep(){
-    // Tạo thông báo
-    const notification = document.createElement('div');
-    notification.innerHTML = `
-        <div style="
-            background: linear-gradient(135deg, rgba(236,72,153,.08), rgba(236,72,153,.12));
-            border: 2px solid rgba(236,72,153,.2);
-            border-radius: 16px;
-            padding: 16px;
-            margin-top: 16px;
-            font-size: 0.9rem;
-            color: #831843;
-            animation: fadeIn 0.5s ease-out;
+        body {
+            font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #f8f4ff 0%, #e6f0ff 100%);
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            gap: 12px;
-        ">
-            <div style="
-                background: #ec4899;
-                color: white;
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 1.1rem;
-                flex-shrink: 0;
-            ">
-                ✓
-            </div>
-            <div>
-                <strong style="display:block; margin-bottom:4px;">✅ Cấu hình đã được tải!</strong>
-                <small style="opacity:0.9;">Vui lòng chuyển sang <strong>Bước 2</strong> để tải app kích hoạt</small>
-            </div>
-        </div>
-    `;
-    
-    // Chèn thông báo vào sau button group
-    const buttonGroup = document.querySelector('.button-group');
-    buttonGroup.parentNode.insertBefore(notification, buttonGroup.nextSibling);
-    
-    // Tự động xóa thông báo sau 6 giây
-    setTimeout(() => {
-        notification.style.opacity = '0';
-        notification.style.transform = 'translateY(-10px)';
-        notification.style.transition = 'all 0.3s ease';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
-    }, 6000);
-}
-
-function showCompletion(){
-    // Tạo thông báo hoàn thành
-    const completion = document.createElement('div');
-    completion.innerHTML = `
-        <div style="
-            background: linear-gradient(135deg, rgba(59,130,246,.08), rgba(59,130,246,.12));
-            border: 2px solid rgba(59,130,246,.2);
-            border-radius: 16px;
+            justify-content: center;
             padding: 20px;
-            margin-top: 16px;
+            color: var(--text-primary);
+            overflow-x: hidden;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+        }
+
+        .container {
+            background: var(--card-bg);
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 107, 157, 0.1);
+            padding: 40px 30px;
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
             text-align: center;
-            animation: fadeIn 0.5s ease-out;
-        ">
-            <div style="
-                font-size: 2.5rem;
-                margin-bottom: 12px;
-                animation: pulse 2s infinite;
-            ">
-                🎉
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        /* Hiệu ứng viền trang trí */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-pink), var(--blue));
+        }
+
+        .app-icon-container {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 25px;
+        }
+
+        .app-icon {
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-pink), var(--blue));
+            border-radius: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px rgba(255, 107, 157, 0.3);
+            animation: float 3s ease-in-out infinite;
+            overflow: hidden;
+            border: 3px solid white;
+            position: relative;
+        }
+
+        .app-icon img {
+            width: 75%;
+            height: 75%;
+            object-fit: contain;
+            display: block;
+        }
+
+        .app-icon-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--blue));
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8em;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 107, 157, 0.3);
+            border: 2px solid white;
+        }
+
+        .app-title {
+            font-size: 2.4em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-pink), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .app-version {
+            color: var(--blue);
+            font-size: 1.4em;
+            margin-bottom: 30px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .version-badge {
+            background: linear-gradient(135deg, var(--primary-pink), var(--blue));
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 30px 0;
+            padding: 25px;
+            background: var(--light-pink);
+            border-radius: 18px;
+            border: 2px dashed rgba(255, 107, 157, 0.2);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.2em;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary-pink), var(--blue));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 1em;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .install-btn {
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(135deg, var(--primary-pink), var(--blue));
+            color: white;
+            border: none;
+            border-radius: 18px;
+            font-size: 22px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 30px 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+        }
+
+        .install-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(255, 107, 157, 0.5);
+            background: linear-gradient(135deg, var(--secondary-pink), #3d7aff);
+        }
+
+        .install-btn:active {
+            transform: translateY(-1px);
+        }
+
+        .install-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+
+        .install-btn:hover::before {
+            left: 100%;
+        }
+
+        .device-notice {
+            background: linear-gradient(135deg, rgba(77, 140, 255, 0.1), rgba(255, 107, 157, 0.1));
+            border: 2px solid rgba(77, 140, 255, 0.2);
+            border-radius: 15px;
+            padding: 18px;
+            margin: 25px 0;
+            color: var(--blue);
+            font-size: 1.1em;
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .device-notice i {
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .warning {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.08), rgba(255, 107, 157, 0.08));
+            border: 2px solid rgba(255, 107, 157, 0.2);
+            border-radius: 15px;
+            padding: 18px;
+            margin: 20px 0;
+            color: var(--primary-pink);
+            font-size: 1em;
+            line-height: 1.6;
+            font-weight: 500;
+        }
+
+        .warning i {
+            margin-right: 10px;
+            color: var(--primary-pink);
+        }
+
+        .url-display {
+            background: var(--light-pink);
+            border: 2px solid rgba(77, 140, 255, 0.2);
+            border-radius: 15px;
+            padding: 18px;
+            margin: 25px 0;
+            text-align: left;
+            word-break: break-all;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            color: var(--blue);
+            max-height: 120px;
+            overflow-y: auto;
+        }
+
+        .url-display::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .url-display::-webkit-scrollbar-track {
+            background: rgba(255, 107, 157, 0.1);
+            border-radius: 3px;
+        }
+
+        .url-display::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, var(--primary-pink), var(--blue));
+            border-radius: 3px;
+        }
+
+        .url-label {
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 600;
+        }
+
+        /* Container cho các nút hành động */
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: 18px;
+            border: none;
+            border-radius: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.7s;
+        }
+
+        .action-btn:hover::before {
+            left: 100%;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, var(--blue), #3d7aff);
+            color: white;
+            box-shadow: 0 5px 15px rgba(77, 140, 255, 0.3);
+        }
+
+        .copy-btn:hover {
+            background: linear-gradient(135deg, #3d7aff, #2d6aff);
+        }
+
+        .shadowrocket-btn {
+            background: linear-gradient(135deg, var(--purple), #8c3dff);
+            color: white;
+            box-shadow: 0 5px 15px rgba(157, 77, 255, 0.3);
+        }
+
+        .shadowrocket-btn:hover {
+            background: linear-gradient(135deg, #8c3dff, #7c2dff);
+        }
+
+        .other-app-btn {
+            background: linear-gradient(135deg, var(--orange), #ff7c3d);
+            color: white;
+            box-shadow: 0 5px 15px rgba(255, 140, 77, 0.3);
+        }
+
+        .other-app-btn:hover {
+            background: linear-gradient(135deg, #ff7c3d, #ff6c2d);
+        }
+
+        .bottom-divider {
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-pink), var(--blue), transparent);
+            margin: 30px 0 25px;
+            opacity: 0.5;
+        }
+
+        .footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95em;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(77, 140, 255, 0.1);
+        }
+
+        .footer p {
+            margin: 8px 0;
+        }
+
+        .install-message {
+            text-align: center;
+            color: var(--blue);
+            font-size: 16px;
+            font-weight: 600;
+            padding: 15px;
+            background: rgba(77, 140, 255, 0.1);
+            border: 2px solid rgba(77, 140, 255, 0.3);
+            border-radius: 15px;
+            opacity: 0;
+            transition: all 0.5s ease;
+            line-height: 1.5;
+            margin-top: 20px;
+            transform: translateY(10px);
+        }
+
+        .install-message.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+                box-shadow: 0 10px 25px rgba(255, 107, 157, 0.3);
+            }
+            50% {
+                transform: translateY(-10px);
+                box-shadow: 0 15px 35px rgba(255, 107, 157, 0.4);
+            }
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 25px 0;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--light-pink);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blue);
+            font-size: 1.2em;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .social-icon:hover {
+            background: var(--blue);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(77, 140, 255, 0.3);
+        }
+
+        .social-icon.pink {
+            color: var(--primary-pink);
+        }
+
+        .social-icon.pink:hover {
+            background: var(--primary-pink);
+            color: white;
+            box-shadow: 0 8px 15px rgba(255, 107, 157, 0.3);
+        }
+
+        /* Thêm logo fallback đẹp hơn */
+        .logo-fallback {
+            width: 70px;
+            height: 70px;
+            background: white;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 24px;
+            color: var(--primary-pink);
+            box-shadow: inset 0 0 0 3px rgba(255, 107, 157, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                max-width: 100%;
+                padding: 30px 20px;
+                border-radius: 20px;
+            }
+
+            .app-icon-container {
+                width: 120px;
+                height: 120px;
+            }
+
+            .app-title {
+                font-size: 2em;
+            }
+
+            .app-version {
+                font-size: 1.2em;
+            }
+
+            .install-btn {
+                padding: 18px;
+                font-size: 20px;
+            }
+
+            .stats {
+                padding: 20px;
+                margin: 25px 0;
+            }
+
+            .stat-number {
+                font-size: 1.8em;
+            }
+
+            .url-display {
+                font-size: 0.85em;
+                max-height: 100px;
+                padding: 15px;
+            }
+            
+            .device-notice, .warning {
+                padding: 15px;
+            }
+            
+            .app-icon img {
+                width: 70%;
+                height: 70%;
+            }
+            
+            .logo-fallback {
+                width: 60px;
+                height: 60px;
+                font-size: 20px;
+            }
+            
+            .action-btn {
+                padding: 16px;
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="app-icon-container">
+            <div class="app-icon">
+                <img src="https://is1-ssl.mzstatic.com/image/thumb/Purple211/v4/0b/70/4d/0b704d45-fcd2-7a2b-afa1-565e6fdab1e4/app_icon-0-0-1x_U007ephone-0-1-sRGB-85-220.png/512x512bb.jpg" 
+                     alt="Locket Widget" 
+                     id="appLogo"
+                     onerror="replaceWithFallbackLogo()">
             </div>
-            <div style="
-                font-weight: 800;
-                font-size: 1.1rem;
-                color: #1e40af;
-                margin-bottom: 8px;
-            ">
-                Hoàn Thành Cài Đặt!
-            </div>
-            <div style="
-                color: #4b5563;
-                font-size: 0.9rem;
-                line-height: 1.5;
-            ">
-                Cấu hình đã được kích hoạt thành công.<br>
-                Bây giờ bạn có thể sử dụng tính năng nâng Gold!
+            <div class="app-icon-badge">
+                <i class="fas fa-apple"></i>
             </div>
         </div>
-    `;
-    
-    // Chèn thông báo vào sau steps
-    const steps = document.querySelector('.steps');
-    steps.parentNode.insertBefore(completion, steps.nextSibling);
-    
-    // Tự động xóa thông báo sau 8 giây
-    setTimeout(() => {
-        completion.style.opacity = '0';
-        completion.style.transform = 'translateY(-10px)';
-        completion.style.transition = 'all 0.3s ease';
-        setTimeout(() => {
-            if (completion.parentNode) {
-                completion.parentNode.removeChild(completion);
+
+        <h1 class="app-title">Locket Widget</h1>
+        <div class="app-version">
+             HOÀNG QUÂN 
+            <span class="version-badge">VIP</span>
+        </div>
+
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">1</div>
+                <div class="stat-label">Lượt cài đặt</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Lượt xem</div>
+            </div>
+        </div>
+
+        <div class="device-notice">
+            <i class="fas fa-mobile-alt"></i>
+            <span id="deviceType">Ứng dụng dành cho thiết bị iOS</span>
+        </div>
+
+        <a href="itms-services://?action=download-manifest&url=https%3A%2F%2Fipa.idapple.vn%2Fapp%2F6ujjfv.plist" class="install-btn" id="installBtn">
+            <i class="fas fa-download"></i> Cài Đặt Ngay
+        </a>
+
+        <div class="warning">
+            <i class="fas fa-exclamation-circle"></i>
+            Chỉ hỗ trợ cài đặt trên thiết bị iPhone/iPad iOS. Đảm bảo bạn đang truy cập từ thiết bị iOS.
+        </div>
+
+        <div class="url-display">
+            <span class="url-label">Các Bước Nâng Lên Gold 15s </span>
+            Bước 1 : Cài Đặt App Locket Gold <br>
+            Bước 2 : Đăng Nhập Tài Khoản Appstore Của HOÀNG QUÂN <br>
+            Bước 3 : Tài Khoản Mật Khẩu Bên Dưới  <br>
+            Bước 4 : Ấn Nút Tải App <br>
+            Bước 5 : Bật App VPN lên <br>
+            Bước 6 : Thành Quả
+        </div>
+
+        <div class="action-buttons">
+<button class="action-btn copy-btn" onclick="copyText('nvan70717@gmail.com', this)">
+    <i class="fas fa-copy"></i> Sao Chép Tài Khoản
+</button>
+
+<button class="action-btn copy-btn" onclick="copyText('Nhq2112@', this)">
+    <i class="fas fa-copy"></i> Sao Chép Mật Khẩu
+</button>
+
+            
+<a href="https://apps.apple.com/us/app/usa-vpn-private-fast/id6475051414" target="_blank" class="action-btn shadowrocket-btn">
+    <i class="fas fa-rocket"></i> Tải App VPN
+</a>
+
+
+        </div>
+
+
+
+    </div>
+
+    <script>
+        // Thay thế logo nếu bị lỗi
+        function replaceWithFallbackLogo() {
+            const logoImg = document.getElementById('appLogo');
+            const appIcon = document.querySelector('.app-icon');
+            
+            // Tạo logo fallback đẹp hơn
+            const fallbackHTML = `
+                <div class="logo-fallback">
+                    <div style="background: linear-gradient(135deg, #ff6b9d, #4d8cff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: bold; font-size: 28px;">
+                        LW
+                    </div>
+                </div>
+            `;
+            
+            appIcon.innerHTML = fallbackHTML;
+        }
+        
+        // Kiểm tra và tải logo
+        function checkLogo() {
+            const logoImg = document.getElementById('appLogo');
+            
+            // Tạo một ảnh tạm để kiểm tra
+            const testImg = new Image();
+            testImg.onload = function() {
+                // Logo tải thành công
+                logoImg.style.display = 'block';
+            };
+            testImg.onerror = function() {
+                // Logo lỗi, thay bằng fallback
+                replaceWithFallbackLogo();
+            };
+            testImg.src = logoImg.src;
+        }
+        
+        // Kiểm tra thiết bị
+        function checkDevice() {
+            const deviceNotice = document.getElementById('deviceType');
+            const installBtn = document.getElementById('installBtn');
+            
+            // Kiểm tra user agent
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            
+            if (isIOS) {
+                deviceNotice.innerHTML = '<i class="fas fa-check-circle"></i> Thiết bị iOS được hỗ trợ';
+                deviceNotice.style.color = '#4d8cff';
+                deviceNotice.style.background = 'linear-gradient(135deg, rgba(77, 140, 255, 0.15), rgba(255, 107, 157, 0.15))';
+                installBtn.classList.remove('disabled');
+            } else {
+                deviceNotice.innerHTML = '<i class="fas fa-exclamation-circle"></i> Vui lòng truy cập từ thiết bị iOS';
+                deviceNotice.style.color = '#ff6b9d';
+                installBtn.classList.add('disabled');
+                installBtn.onclick = function(e) {
+                    e.preventDefault();
+                    showMessage('Vui lòng truy cập từ thiết bị iPhone/iPad để cài đặt', 'warning');
+                };
             }
-        }, 300);
-    }, 8000);
+        }
+        
+        // Sao chép liên kết cài đặt
+        function copyInstallLink() {
+            const link = 'itms-services://?action=download-manifest&url=https%3A%2F%2Fipa.idapple.vn%2Fapp%2F6ujjfv.plist';
+            
+            // Tạo một phần tử textarea tạm thời
+            const textArea = document.createElement('textarea');
+            textArea.value = link;
+            document.body.appendChild(textArea);
+            
+            // Chọn và sao chép nội dung
+            textArea.select();
+            textArea.setSelectionRange(0, 99999); // Cho thiết bị di động
+            document.execCommand('copy');
+            
+            // Xóa phần tử tạm thời
+            document.body.removeChild(textArea);
+            
+            // Hiển thị thông báo
+            showMessage('Đã sao chép liên kết cài đặt vào clipboard!', 'success');
+            
+            // Hiệu ứng cho nút
+            const copyBtn = event.currentTarget;
+            copyBtn.innerHTML = '<i class="fas fa-check"></i> Đã Sao Chép';
+            
+            setTimeout(() => {
+                copyBtn.innerHTML = '<i class="fas fa-copy"></i> Sao Chép Liên Kết';
+            }, 2000);
+        }
+        // Sao chép text bất kỳ (tài khoản / mật khẩu)
+function copyText(text, btn) {
+    const textArea = document.createElement('textarea');
+    textArea.value = text;
+    document.body.appendChild(textArea);
+
+    textArea.select();
+    textArea.setSelectionRange(0, 99999);
+    document.execCommand('copy');
+
+    document.body.removeChild(textArea);
+
+    showMessage('Đã sao chép vào clipboard!', 'success');
+
+    // hiệu ứng nút
+    const oldHTML = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-check"></i> Đã Sao Chép';
+
+    setTimeout(() => {
+        btn.innerHTML = oldHTML;
+    }, 2000);
 }
 
-// Thêm hiệu ứng khi trang tải xong
-document.addEventListener('DOMContentLoaded', () => {
-    // Thêm hiệu ứng khi chạm vào card
-    const card = document.querySelector('.card');
-    card.addEventListener('touchstart', function() {
-        this.style.transform = 'scale(0.995)';
-    });
-    
-    card.addEventListener('touchend', function() {
-        this.style.transform = 'scale(1)';
-    });
-    
-    // Tự động tập trung vào nút đầu tiên
-    configBtn.focus({ preventScroll: true });
-    
-    // Thêm hiệu ứng cho các nút khi hover (cho desktop)
-    const buttons = document.querySelectorAll('.btn');
-    buttons.forEach(btn => {
-        btn.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-2px)';
+        // Mở trong Shadowrocket
+        function openShadowrocket() {
+            const link = 'itms-services://?action=download-manifest&url=https%3A%2F%2Fipa.idapple.vn%2Fapp%2F6ujjfv.plist';
+            
+            // URL scheme của Shadowrocket
+            const shadowrocketUrl = `shadowrocket://import?url=${encodeURIComponent(link)}`;
+            
+            // Mở Shadowrocket
+            window.location.href = shadowrocketUrl;
+            
+            // Hiển thị thông báo
+            showMessage('Đang mở Shadowrocket... Nếu không mở được, hãy đảm bảo bạn đã cài đặt Shadowrocket.', 'info');
+            
+            // Hiệu ứng cho nút
+            const shadowrocketBtn = event.currentTarget;
+            shadowrocketBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang mở...';
+            
+            setTimeout(() => {
+                shadowrocketBtn.innerHTML = '<i class="fas fa-rocket"></i> Mở Trong Shadowrocket';
+            }, 2000);
+        }
+        
+        // Mở trong ứng dụng khác
+        function openOtherApps() {
+            const link = 'itms-services://?action=download-manifest&url=https%3A%2F%2Fipa.idapple.vn%2Fapp%2F6ujjfv.plist';
+            
+            // Danh sách các ứng dụng có thể mở link IPA
+            const apps = [
+                { name: 'Esign', scheme: 'esign://import?url=' },
+                { name: 'TrollStore', scheme: 'trollstore://install?url=' },
+                { name: 'AltStore', scheme: 'altstore://install?url=' },
+                { name: 'Sideloadly', scheme: 'sideloadly://import?url=' }
+            ];
+            
+            // Hiển thị menu lựa chọn
+            const appList = apps.map(app => `${app.name}`).join(', ');
+            const message = `Chọn ứng dụng để mở:\n${appList}\n\nHoặc chọn "Sao chép liên kết" để sử dụng sau.`;
+            
+            if (confirm(message)) {
+                // Hiển thị hướng dẫn
+                showMessage(`Vui lòng chọn ứng dụng từ danh sách để mở liên kết IPA.\n\nHoặc sao chép liên kết và mở thủ công.`, 'info');
+                
+                // Sao chép link để người dùng có thể paste vào app
+                copyInstallLink();
+            }
+            
+            // Hiệu ứng cho nút
+            const otherBtn = event.currentTarget;
+            otherBtn.innerHTML = '<i class="fas fa-check"></i> Đã Hiển Thị';
+            
+            setTimeout(() => {
+                otherBtn.innerHTML = '<i class="fas fa-external-link-alt"></i> Mở Ứng Dụng Khác';
+            }, 2000);
+        }
+        
+        // Hiển thị thông báo
+        function showMessage(message, type) {
+            const messageElement = document.getElementById('installMessage');
+            messageElement.textContent = message;
+            
+            if (type === 'success') {
+                messageElement.style.color = '#4d8cff';
+                messageElement.style.background = 'rgba(77, 140, 255, 0.1)';
+                messageElement.style.border = '2px solid rgba(77, 140, 255, 0.3)';
+            } else if (type === 'warning') {
+                messageElement.style.color = '#ff6b9d';
+                messageElement.style.background = 'rgba(255, 107, 157, 0.1)';
+                messageElement.style.border = '2px solid rgba(255, 107, 157, 0.3)';
+            } else if (type === 'info') {
+                messageElement.style.color = '#9d4dff';
+                messageElement.style.background = 'rgba(157, 77, 255, 0.1)';
+                messageElement.style.border = '2px solid rgba(157, 77, 255, 0.3)';
+            }
+            
+            messageElement.classList.add('show');
+            
+            // Ẩn thông báo sau 4 giây
+            setTimeout(() => {
+                messageElement.classList.remove('show');
+            }, 4000);
+        }
+        
+        // Xử lý sự kiện khi nhấn nút cài đặt
+        document.getElementById('installBtn').addEventListener('click', function(e) {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+            
+            if (!isIOS) {
+                e.preventDefault();
+                showMessage('Vui lòng truy cập từ thiết bị iPhone/iPad để cài đặt', 'warning');
+                return;
+            }
+            
+            showMessage('Đang mở trình cài đặt...', 'success');
+            
+            // Hiệu ứng cho nút
+            this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang mở...';
+            this.style.opacity = '0.9';
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="fas fa-download"></i> Cài Đặt Ngay';
+                this.style.opacity = '1';
+            }, 2000);
+            
+            // Nếu không tự động chuyển hướng sau 1 giây, hiển thị hướng dẫn
+            setTimeout(() => {
+                showMessage('Nếu trình cài đặt không mở, vui lòng nhấn "Cho phép" khi được hỏi', 'warning');
+            }, 1000);
         });
         
-        btn.addEventListener('mouseleave', function() {
-            this.style.transform = 'translateY(0)';
-        });
-    });
-});
-</script>
-
+        // Chia sẻ ứng dụng
+        function shareApp() {
+            const shareText = "Tải Locket Widget cho iOS - Ứng dụng tuyệt vời!";
+            const shareUrl = window.location.href;
+            
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Locket Widget',
+                    text: shareText,
+                    url: shareUrl
+                });
+            } else {
+                showMessage('Chia sẻ: ' + shareUrl, 'info');
+                copyInstallLink();
+            }
+        }
+        
+        // Tải lại trang
+        function refreshPage() {
+            window.location.reload();
+        }
+        
+        // Hiển thị thông tin
+        function showInfo() {
+            showMessage('Locket Widget v2.31.1 - Ứng dụng dành cho iOS. Cần iPhone/iPad để cài đặt.', 'info');
+        }
+        
+        // Khởi tạo khi trang được tải
+        window.onload = function() {
+            checkLogo();
+            checkDevice();
+            
+            // Thêm hiệu ứng cho icon
+            const appIcon = document.querySelector('.app-icon');
+            if (appIcon) {
+                appIcon.addEventListener('mouseenter', function() {
+                    this.style.animation = 'pulse 0.5s ease-in-out';
+                });
+                
+                appIcon.addEventListener('mouseleave', function() {
+                    this.style.animation = 'float 3s ease-in-out infinite';
+                });
+            }
+        };
+    </script>
 </body>
 </html>
